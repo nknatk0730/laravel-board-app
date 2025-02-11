@@ -21,15 +21,21 @@
     </div>
     {{-- comments --}}
     <h2 class="text-lg font-semibold">Comments</h2>
-    <div class="space-y-2">
-      @foreach ($post->comments as $comment)
+    @if ($comments->isEmpty())
+      <p>No comments yet</p>
+    @else
+    @foreach ($comments as $comment)
         <div class="border p-2">
           <p>{{ $comment->content }}</p>
           <p class="text-sm text-gray-500">{{ $comment->user->name }}</p>
           <p class="text-sm text-gray-500">{{ $comment->created_at->format('Y-m-d H:i') }}</p>
         </div>
       @endforeach
-
+    @endif
+    <div>
+      {{ $comments->links() }}
+    </div>
+    <div class="space-y-2">
     {{-- comment form --}}
     @auth
       <form action="{{ route('comments.store', $post->id) }}" method="POST">

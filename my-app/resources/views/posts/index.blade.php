@@ -29,5 +29,9 @@
         </li>
       @endforeach
     </ul>
+    {{-- pagination link --}}
+    <div>
+      {{ $posts->links() }}
+    </div>
   </div>
 @endsection
