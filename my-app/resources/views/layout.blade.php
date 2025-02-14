@@ -33,6 +33,9 @@
             <a href="{{ route('register') }}" class="border hover:bg-slate-300 p-1 rounded">Register</a>
           </li>
         @endif
+        <li>
+          <a class="border hover:bg-slate-300 p-1 rounded" href="{{ route('contact.index') }}">Contact</a>
+        </li>
       </ul>
     </div>
   </nav>

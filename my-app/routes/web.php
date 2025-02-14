@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +30,13 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.upda
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 // コメントを作成するためのルーティングを追加
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+// いいねを投稿するルーティング
+Route::post('/posts/{post}/likes', [LikeController::class, 'toggleLike'])->name('likes.toggle')->middleware('auth');
+// contact form
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
+
 
 require __DIR__.'/auth.php';

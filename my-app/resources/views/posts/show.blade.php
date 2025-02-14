@@ -19,6 +19,13 @@
         </form>
       @endif
     </div>
+    {{-- Likes button --}}
+      <form action="{{ route('likes.toggle', $post->id) }}" method="POST">
+        @csrf
+        <button class="flex w-14 items-center justify-center border rounded p-1 {{ $post->likes->contains('user_id', auth()->id()) ? 'bg-white' : 'bg-green-500' }}"
+          type="submit">{{ $post->likes->contains('user_id', auth()->id()) ? 'unLike' : 'Like' }}</button>
+      </form>
+      <p>{{ $post->likes->count() }} likes</p>
     {{-- comments --}}
     <h2 class="text-lg font-semibold">Comments</h2>
     @if ($comments->isEmpty())
